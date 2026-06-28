@@ -1,27 +1,10 @@
-from flask import Flask, jsonify
-import os
+from flask import Flask
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route('/')
 def home():
-    return jsonify({
-        "message": "Hello from Azure App Service!",
-        "status": "running",
-        "version": "1.0.0"
-    })
+    return "✅ Python App deployed via GitHub CI/CD successfully!"
 
-@app.route("/health")
-def health():
-    return jsonify({"status": "healthy"}), 200
-
-@app.route("/info")
-def info():
-    return jsonify({
-        "python_version": os.popen("python --version").read().strip(),
-        "environment": os.environ.get("FLASK_ENV", "production")
-    })
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
-    app.run(host="0.0.0.0", port=port)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000)
